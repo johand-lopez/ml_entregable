@@ -573,19 +573,28 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">157</span>     <span class="n">tag_name</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span>
 <span class="g g-Whitespace">    </span><span class="mi">158</span>     <span class="k">if</span> <span class="n">tag_name</span> <span class="ow">in</span> <span class="n">dispatcher</span><span class="p">:</span>
 
-<span class="nn">File ~\miniconda3\envs\ml_venv\lib\xml\etree\ElementTree.py:1258,</span> in <span class="ni">iterparse.&lt;locals&gt;.iterator</span><span class="nt">(source)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1256</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1257</span>         <span class="k">break</span>
-<span class="ne">-&gt; </span><span class="mi">1258</span>     <span class="n">pullparser</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1259</span> <span class="n">root</span> <span class="o">=</span> <span class="n">pullparser</span><span class="o">.</span><span class="n">_close_and_return_root</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1260</span> <span class="k">yield from</span> <span class="n">pullparser</span><span class="o">.</span><span class="n">read_events</span><span class="p">()</span>
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\xml\etree\ElementTree.py:1255,</span> in <span class="ni">iterparse.&lt;locals&gt;.iterator</span><span class="nt">(source)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1253</span> <span class="k">yield from</span> <span class="n">pullparser</span><span class="o">.</span><span class="n">read_events</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1254</span> <span class="c1"># load event buffer</span>
+<span class="ne">-&gt; </span><span class="mi">1255</span> <span class="n">data</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1256</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1257</span>     <span class="k">break</span>
 
-<span class="nn">File ~\miniconda3\envs\ml_venv\lib\xml\etree\ElementTree.py:1296,</span> in <span class="ni">XMLPullParser.feed</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1294</span> <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1295</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1296</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_parser</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1297</span>     <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1298</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_events_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\zipfile.py:926,</span> in <span class="ni">ZipExtFile.read</span><span class="nt">(self, n)</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span> <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eof</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">926</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_readbuffer</span> <span class="o">=</span> <span class="n">data</span>
+
+<span class="nn">File ~\miniconda3\envs\ml_venv\lib\zipfile.py:1002,</span> in <span class="ni">ZipExtFile._read1</span><span class="nt">(self, n)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1000</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compress_type</span> <span class="o">==</span> <span class="n">ZIP_DEFLATED</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1001</span>     <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_READ_SIZE</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1002</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1003</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_eof</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">eof</span> <span class="ow">or</span>
+<span class="g g-Whitespace">   </span><span class="mi">1004</span>                  <span class="bp">self</span><span class="o">.</span><span class="n">_compress_left</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">and</span>
+<span class="g g-Whitespace">   </span><span class="mi">1005</span>                  <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1006</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eof</span><span class="p">:</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1077,7 +1086,7 @@ c:\Users\johan\miniconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:149
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\johan\AppData\Local\Temp\ipykernel_19268\4281373875.py:2: FutureWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\johan\AppData\Local\Temp\ipykernel_8248\4281373875.py:2: FutureWarning: 
 
 The `ci` parameter is deprecated. Use `errorbar=None` for the same effect.
 
